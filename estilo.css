@@ -1,0 +1,354 @@
+/* --- MUDANÇA --- */
+/* 1. IMPORTAÇÃO DE FONTES (GOOGLE FONTS) */
+/* Importa as fontes que vamos usar: 'Inter' para o texto e 'Playfair Display' para títulos */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+/* --- MUDANÇA --- */
+/* 2. VARIÁVEIS GLOBAIS (:root) */
+/* Este é o "painel de controlo" do design. */
+:root {
+    /* Cor de Acento (O teu vermelho original) */
+    --cor-acento: #D4AF37;
+    --cor-acento-hover: #e0c460;
+
+    /* Cores de Fundo */
+    --cor-fundo:#12100e; /* Um cinzento-escuro, mais suave que 'black' */
+    --cor-bloco:#1C1A18; /* Cor para os "cartões" dos livros */
+    --cor-bloco-header: #141210; /* Fundo ligeiramente diferente para o header */
+
+    /* Cores de Texto */
+    --cor-texto: #e0e0e0; /* Branco-suave, mais fácil de ler que 'white' */
+    --cor-texto-secundario: #AAAAAA; /* Cinzento para descrições e rodapé */
+    --cor-texto-labels: #CCCCCC;
+
+    /* Cores de Inputs/Bordas */
+    --cor-input-fundo: #252525;
+    --cor-input-borda: #dd4141;
+
+    /* Tipografia */
+    --fonte-principal: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --fonte-titulos: 'Playfair Display', "SERIF", cursive;
+}
+
+
+/* -------------------------------------- */
+/* 3. ANIMAÇÃO DE FUNDO (GOTAS) */
+/* -------------------------------------- */
+
+@keyframes cair {
+    0% {
+        transform: translateY(-50px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.gota {
+    width: 15px;
+    height: 15px;
+    background-color: var(--cor-acento); /* --- MUDANÇA: Usando variável --- */
+    border-radius: 50%;
+    position: fixed;
+    z-index: -1; 
+    animation-name: cair;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 4s; 
+}
+.gota-1 { left: 10%; animation-delay: 0s; }
+.gota-2 { left: 45%; animation-delay: 1.0s; }
+.gota-3 { left: 80%; animation-delay: 2s; }
+.gota-4 { left: 25%; animation-delay: 0.5s; animation-duration: 5s; width: 12px; height: 12px; opacity: 0.8;}
+.gota-5 { left: 65%; animation-delay: 1.5s; animation-duration: 3.5s; width: 18px; height: 18px; opacity: 0.6;}
+.gota-6 { left: 90%; animation-delay: 2.5s; animation-duration: 6s; width: 10px; height: 10px; opacity: 0.9;}
+
+
+/* -------------------------------------- */
+/* 4. ESTILOS GERAIS */
+/* -------------------------------------- */
+
+/* --- MUDANÇA: Reset básico e suavização --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding/border não afetem o tamanho total */
+}
+
+body {
+    background-color: var(--cor-fundo); /* --- MUDANÇA --- */
+    color: var(--cor-texto); /* --- MUDANÇA: Cor de texto padrão --- */
+    font-family: var(--fonte-principal); /* --- MUDANÇA --- */
+    text-align: center;
+    padding-bottom: 50px; 
+}
+
+/* --- MUDANÇA: H2 e H3 usam a fonte de título. Labels usam cor de label. --- */
+h2, h3 {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-acento);
+}
+
+label {
+    color: var(--cor-texto-labels);
+}
+
+/* --- MUDANÇA: Links agora usam a cor de acento e têm transição --- */
+a {
+    color: var(--cor-acento);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-acento-hover);
+}
+
+
+/* -------------------------------------- */
+/* 5. HEADER E NAVEGAÇÃO */
+/* -------------------------------------- */
+
+header {
+    background-color: var(--cor-bloco-header); /* --- MUDANÇA --- */
+    padding: 20px 0;
+    border-bottom: 2px solid var(--cor-acento); /* --- MUDANÇA --- */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+h1 {
+    font-family: var(--fonte-titulos); /* --- MUDANÇA --- */
+    padding: 10px 0;
+    font-size: 50px;
+    margin: 0;
+    color: var(--cor-texto); /* --- MUDANÇA: Título principal em branco --- */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+nav a {
+    font-weight: bold;
+    font-family: var(--fonte-principal);
+    font-size: 18px;
+}
+/* O hover já está coberto pela regra 'a:hover' geral */
+
+
+/* -------------------------------------- */
+/* 6. SEÇÃO PRINCIPAL (LIVROS) */
+/* -------------------------------------- */
+
+.dicas-de-livros {
+    padding: 20px;
+}
+
+.dicas-de-livros h2 {
+    font-size: 40px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.livro-em-destaque, .livro {
+    display: flex; 
+    align-items: flex-start; 
+    gap: 30px; 
+    max-width: 900px;
+    margin: 40px auto; 
+    text-align: left; 
+    padding: 25px;
+    
+    /* --- MUDANÇAS DE DESIGN --- */
+    border: 1px solid var(--cor-input-borda); /* Borda mais suave */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    background-color: var(--cor-bloco); /* --- MUDANÇA --- */
+    position: relative; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- MUDANÇA: Efeito de "levantar" o cartão ao passar o rato --- */
+.livro-em-destaque:hover, .livro:hover {
+    transform: translateY(-5px); /* Move o cartão 5px para cima */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para a capa do livro */
+.livro-em-destaque img, 
+.livro img {
+    width: 150px;
+    height: auto;
+    flex-shrink: 0; 
+    border-radius: 8px; /* --- MUDANÇA: Arredondado --- */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra mais escura */
+    
+    /* Transição que tinhas (agora aplicada a todas as imagens) */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* O teu hover original, agora usando a variável */
+.livro-em-destaque img:hover,
+.livro img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--cor-acento); /* --- MUDANÇA --- */
+}
+
+
+.info-livro h3 {
+    margin-top: 0;
+    font-size: 28px; /* Aumentado para título do livro */
+    margin-bottom: 10px;
+    color: var(--cor-acento); /* --- MUDANÇA --- */
+}
+
+/* --- MUDANÇA: Esta era a tua tag <h4>, agora é <p> --- */
+.info-livro p {
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--cor-texto-secundario); /* --- MUDANÇA: Cor mais suave --- */
+    line-height: 1.6; /* Melhora a leitura */
+}
+
+/* Estilo para a prévia visual */
+.visual-preview {
+    position: absolute; 
+    top: -15px; 
+    right: -15px; 
+    padding: 5px; 
+    z-index: 10; 
+    opacity: 0.85; 
+}
+
+.visual-preview img {
+    width: 60px; 
+    height: 60px;
+    object-fit: cover; 
+    box-shadow: none; 
+    border-radius: 50%; 
+    border: 2px solid var(--cor-acento); /* --- MUDANÇA --- */
+}
+
+
+
+.btn-voto:hover {
+    background-color: var(--cor-acento); /* --- MUDANÇA --- */
+}
+
+
+/* -------------------------------------- */
+/* 7. SEÇÃO DE CONTATO/FORMULÁRIO */
+/* -------------------------------------- */
+
+.contato h2 {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.form-contato {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+}
+
+.form-contato label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: left; 
+    font-weight: bold;
+}
+.form-contato input[type="text"],
+.form-contato textarea {
+    padding: 12px; /* --- MUDANÇA: Mais espaço --- */
+    border: 1px solid var(--cor-input-borda); /* --- MUDANÇA --- */
+    background-color: var(--cor-input-fundo); /* --- MUDANÇA --- */
+    color: var(--cor-texto); /* --- MUDANÇA --- */
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: var(--fonte-principal);
+}
+
+.form-contato textarea {
+    resize: vertical; 
+}
+
+.form-contato button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: var(--cor-acento); /* --- MUDANÇA --- */
+    color: var(--cor-texto); /* --- MUDANÇA --- */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* --- MUDANÇA --- */
+}
+
+.form-contato button:hover {
+    background-color: var(--cor-acento-hover); /* --- MUDANÇA --- */
+}
+
+/* -------------------------------------- */
+/* 8. FOOTER */
+/* -------------------------------------- */
+
+footer {
+    padding: 20px;
+    border-top: 1px solid var(--cor-input-borda); /* --- MUDANÇA --- */
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    color: var(--cor-texto-secundario); /* --- MUDANÇA --- */
+}
+
+/* -------------------------------------- */
+/* 9. RESPONSIVIDADE (PARA TELAS MENORES) */
+/* -------------------------------------- */
+@media (max-width: 768px) {
+    .livro-em-destaque, .livro {
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        margin: 20px; 
+    }
+
+    /* --- MUDANÇA: Texto da descrição alinhado à esquerda para melhor leitura --- */
+    .info-livro p {
+        text-align: left;
+    }
+    
+    h1 {
+        font-size: 40px;
+    }
+    
+    .dicas-de-livros h2 {
+        font-size: 30px;
+    }
+    
+    /* --- MUDANÇA: Em vez de esconder, vamos reposicionar --- */
+    .visual-preview {
+        position: static; /* Remove o posicionamento absoluto */
+        margin-top: 20px; /* Adiciona espaço */
+        opacity: 1;
+    }
+}
+
+/* -------------------------------------------------- */
+/* 10. EFEITOS DE HOVER INTERATIVOS (ADICIONADO) */
+/* -------------------------------------------------- */
+/* Esta seção já foi integrada nas regras acima (em .livro img e .livro) */
+
+/* --- MUDANÇA: Corrigido o '}' extra que tinhas no fim do teu ficheiro original --- */
